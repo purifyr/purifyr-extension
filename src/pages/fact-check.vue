@@ -12,18 +12,22 @@ const submitReport = async () => {
 
   console.log('Text to Analyze:', textToAnalyze.value)
 
-  // Simuler une note d'analyse (par exemple, aléatoire pour la démo)
+  // Simulate an analysis note (e.g. random for demo)
   analysisRating.value = Math.floor(Math.random() * 5) + 1
 
   isLoading.value = false
   showModal.value = true
+
+  // Reset the form
+  analysisRating.value = ''
+  textToAnalyze.value = ''
 }
 </script>
 
 <template>
   <div class="mx-auto p-4 bg-base-100">
     <h2 class="text-2xl font-bold text-center mb-4">Fact Check a Text</h2>
-    <div class="divider"></div>
+    <div class="divider" />
     <form
       class="space-y-4"
       @submit.prevent="submitReport"

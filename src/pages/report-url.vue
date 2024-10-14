@@ -15,6 +15,10 @@ const submitReport = async () => {
 
   isLoading.value = false
   showModal.value = true
+
+  // Reset the form
+  url.value = ''
+  cause.value = ''
 }
 </script>
 
