@@ -1,4 +1,4 @@
-# Purifyr - Chrome Extension 🛡️
+# 🛡️ Purifyr - Chrome Extension
 
 Purifyr is a Chrome extension designed to promote awareness, prevention, and support against harmful online content. By enabling community-driven content moderation, Purifyr helps users report, block, and stay informed about potentially dangerous or inappropriate material. This extension aims to create a safer browsing environment through collective vigilance and proactive protection.
 
@@ -44,22 +44,22 @@ Purifyr is a Chrome extension designed to promote awareness, prevention, and sup
 - **Submission to Admins**: Once the screenshot and context are provided, the report is sent to administrators for review.
 - **Notifications to Users**: Users receive a notification through the extension when their report has been reviewed by administrators and submitted to Pharos.
 
-## How to Install 🖥️
+## 🖥️ How to install
 1. Clone or download this repository.
 2. Open Chrome and navigate to **chrome://extensions**.
 3. Enable **Developer mode** in the top right corner.
 4. Click on **Load unpacked** and select the folder containing the extension files.
 
-## How to Use 💡
+## 💡 How to use 
 - Right-click on content you wish to report and select **"Report with Purifyr"**.
 - Customize your content filters in the extension settings.
 - Receive awareness notifications when visiting potentially harmful sites.
 
-## Contributing 🤝
+## 🤝 Contributing 
 We welcome contributions from the community! Feel free to fork this repository and submit pull requests with improvements, new features, or bug fixes.
 
-## License 📜
+## 📜 License 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Contact 📧
+## 📧 Contact 
 For any questions or support, feel free to contact us at contact@purifyr.app.
