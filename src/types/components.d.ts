@@ -14,6 +14,7 @@ declare module 'vue' {
     IIcOutlineRemoveRedEye: typeof import('~icons/ic/outline-remove-red-eye')['default']
     IMdiCog: typeof import('~icons/mdi/cog')['default']
     IMdiFileSearchOutline: typeof import('~icons/mdi/file-search-outline')['default']
+    IMdiInformationSlabCircleOutline: typeof import('~icons/mdi/information-slab-circle-outline')['default']
     IMdiLinkVariant: typeof import('~icons/mdi/link-variant')['default']
     IMdiPoliceBadgeOutline: typeof import('~icons/mdi/police-badge-outline')['default']
     IMdiWeatherNight: typeof import('~icons/mdi/weather-night')['default']

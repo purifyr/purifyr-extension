@@ -58,7 +58,7 @@ const submitReport = async () => {
       <div class="form-control">
         <button
           type="submit"
-          class="btn btn-primary w-full"
+          class="btn btn-secondary w-full"
           :disabled="isLoading"
         >
           <span v-if="!isLoading">Submit for Analysis</span>
