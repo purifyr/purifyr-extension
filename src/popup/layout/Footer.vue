@@ -41,16 +41,21 @@
             <i-mdi-cog />
           </RouterLink>
         </div>
-        <label class="btn btn-ghost btn-sm swap swap-rotate">
-          <!-- this hidden checkbox controls the state -->
-          <input
-            type="checkbox"
-            class="theme-controller"
-            value="dark"
-          />
-          <i-ic-baseline-wb-sunny class="swap-off" />
-          <i-mdi-weather-night class="swap-on" />
-        </label>
+        <div
+          class="tooltip tooltip-top"
+          data-tip="Dark mode"
+        >
+          <label class="btn btn-ghost btn-sm swap swap-rotate">
+            <!-- this hidden checkbox controls the state -->
+            <input
+              type="checkbox"
+              class="theme-controller"
+              value="dark"
+            />
+            <i-ic-baseline-wb-sunny class="swap-off" />
+            <i-mdi-weather-night class="swap-on" />
+          </label>
+        </div>
       </div>
     </div>
   </footer>

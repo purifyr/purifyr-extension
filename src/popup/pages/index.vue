@@ -21,7 +21,7 @@
       class="btn justify-start"
     >
       <i-mdi-police-badge-outline />
-      Report suspicious behavior
+      Report suspicious behavior (Pharos)
     </RouterLink>
   </div>
 </template>
