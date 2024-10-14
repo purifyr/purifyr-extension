@@ -54,9 +54,9 @@ export default {
     },
   ],
   icons: {
-    16: 'src/assets/logo.png',
-    24: 'src/assets/logo.png',
-    32: 'src/assets/logo.png',
-    128: 'src/assets/logo.png',
+    16: 'src/assets/security.png',
+    24: 'src/assets/security.png',
+    32: 'src/assets/security.png',
+    128: 'src/assets/security.png',
   },
 } as ManifestV3Export

@@ -7,10 +7,13 @@ module.exports = {
   plugins: [
     'prettier-plugin-tailwindcss',
     require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
+    require('@tailwindcss/forms')({ strategy: 'class' }),
     require('daisyui'),
   ],
   daisyui: {
     logs: false,
+    themes: ['nord', 'dark'],
+    darkTheme: 'nord',
+    utils: true,
   },
 }

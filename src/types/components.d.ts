@@ -8,6 +8,16 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Changelog: typeof import('./../components/Changelog.vue')['default']
+    Footer: typeof import('./../popup/layout/Footer.vue')['default']
+    Header: typeof import('./../popup/layout/Header.vue')['default']
+    IIcBaselineWbSunny: typeof import('~icons/ic/baseline-wb-sunny')['default']
+    IIcOutlineRemoveRedEye: typeof import('~icons/ic/outline-remove-red-eye')['default']
+    IMdiCog: typeof import('~icons/mdi/cog')['default']
+    IMdiFileSearchOutline: typeof import('~icons/mdi/file-search-outline')['default']
+    IMdiLinkVariant: typeof import('~icons/mdi/link-variant')['default']
+    IMdiPoliceBadgeOutline: typeof import('~icons/mdi/police-badge-outline')['default']
+    IMdiWeatherNight: typeof import('~icons/mdi/weather-night')['default']
+    IMdiWeatherSunny: typeof import('~icons/mdi/weather-sunny')['default']
     Install: typeof import('./../components/install.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

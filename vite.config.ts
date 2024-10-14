@@ -81,7 +81,7 @@ export default defineConfig({
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
-      dirs: ['src/components'],
+      dirs: ['src/components', 'src/popup/layout/'],
       // generate `components.d.ts` for ts support with Volar
       dts: 'src/types/components.d.ts',
       resolvers: [

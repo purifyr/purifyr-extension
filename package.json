@@ -1,6 +1,6 @@
 {
-  "name": "purifyr",
-  "displayName": "Purifyr Chrome Extension",
+  "name": "purifyr-extension",
+  "displayName": "Purifyr",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
     "@crxjs/vite-plugin": "^2.0.0-beta.25",
+    "@iconify-json/ic": "^1.2.1",
     "@iconify-json/mdi": "^1.2.0",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
