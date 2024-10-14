@@ -67,6 +67,7 @@ const submitReport = async () => {
           </option>
           <option value="harassment">Harassment</option>
           <option value="terrorism">Terrorism</option>
+          <option value="phishing">Phishing</option>
           <option value="fraud">Fraud</option>
           <option value="illegal_content">Illegal Content</option>
           <option value="other">Other</option>

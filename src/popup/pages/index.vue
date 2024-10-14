@@ -41,7 +41,7 @@
       Fact check a text
     </RouterLink>
     <RouterLink
-      to="/common/fact-check"
+      to="/common/report-pharos"
       class="btn justify-start"
     >
       <i-mdi-police-badge-outline />
