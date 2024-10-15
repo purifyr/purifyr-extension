@@ -34,14 +34,13 @@ export const useApiFetch = createFetch({
                         Authorization: `Bearer ${newToken}`,
                     }
                     // Rerun initial request with native fetch
-                    return fetch(response.url!, originalOptions).then(res =>
-                        res.json(),
-                    )
+                    return fetch(response.url!, originalOptions).then(res => res.json())
                 }
             }
-            // Return error if it's not a token problem
-            return { data, error }
-        },
+            const errorMessage = data?.message || error?.message || 'Unknown error'
+            return { data, error: new Error(errorMessage) }
+        }
+
     },
     fetchOptions: {
         mode: 'cors',

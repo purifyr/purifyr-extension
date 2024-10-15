@@ -61,7 +61,7 @@ export default defineConfig({
         },
       ],
       extendRoute(route, parent) {
-        if (route.path === '/common/login') {
+        if (route.path === '/common/login' || route.path === '/common/register') {
           // La route racine ("/") n'exige pas d'authentification
           return route
         }

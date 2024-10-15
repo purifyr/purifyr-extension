@@ -300,6 +300,7 @@
     "watchWithFilter": true,
     "whenever": true,
     "useAuthStore": true,
-    "useApiFetch": true
+    "useApiFetch": true,
+    "useReportStore": true
   }
 }

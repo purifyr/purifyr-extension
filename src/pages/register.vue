@@ -13,11 +13,6 @@ const submitRegister = async () => {
     return
   }
 
-  if (!acceptTerms.value) {
-    alert('You must accept the terms and conditions.')
-    return
-  }
-
   isLoading.value = true
   await new Promise((resolve) => setTimeout(resolve, 2000))
 
@@ -36,7 +31,6 @@ const submitRegister = async () => {
   email.value = ''
   password.value = ''
   confirmPassword.value = ''
-  acceptTerms.value = false
 }
 </script>
 

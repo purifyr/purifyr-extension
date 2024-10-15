@@ -1,30 +1,43 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useReportStore } from '@/stores/report.store'
 
 const url = ref('')
 const cause = ref('')
-const isLoading = ref(false)
 const showModal = ref(false)
 
+const reportStore = useReportStore()
+
 const submitReport = async () => {
-  isLoading.value = true
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  reportStore.loading = true
 
-  console.log('URL:', url.value)
-  console.log('Cause:', cause.value)
+  await reportStore.addReportUrl({
+    url: url.value,
+    cause: cause.value,
+  })
 
-  isLoading.value = false
-  showModal.value = true
-
-  url.value = ''
-  cause.value = ''
+  if (!reportStore.error) {
+    showModal.value = true
+    url.value = ''
+    cause.value = ''
+  }
+  reportStore.loading = false
 }
 </script>
 
 <template>
   <div class="mx-auto p-4 bg-base-100">
     <h2 class="text-2xl font-bold text-center mb-4">Report a suspicious URL</h2>
-    <div class="divider"></div>
+    <div class="divider" />
+    <!-- Show errors if they exist -->
+    <div
+      v-if="reportStore.error"
+      role="alert"
+      class="alert alert-error mb-4"
+    >
+      <i-mdi-alert-circle-outline class="" />
+      <span>{{ reportStore.error }}</span>
+    </div>
     <form
       class="space-y-4"
       @submit.prevent="submitReport"
@@ -76,11 +89,11 @@ const submitReport = async () => {
         <button
           type="submit"
           class="btn btn-secondary w-full"
-          :disabled="isLoading"
+          :disabled="reportStore.loading"
         >
-          <span v-if="!isLoading">Submit Report</span>
+          <span v-if="!reportStore.loading">Submit Report</span>
           <span
-            v-if="isLoading"
+            v-if="reportStore.loading"
             class="flex items-center justify-center"
           >
             <span class="loading loading-spinner mr-2" />
