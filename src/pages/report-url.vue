@@ -4,7 +4,7 @@ import { ref } from 'vue'
 const url = ref('')
 const cause = ref('')
 const isLoading = ref(false)
-const showModal = ref(false) // Variable pour afficher ou cacher la modal
+const showModal = ref(false)
 
 const submitReport = async () => {
   isLoading.value = true
@@ -16,7 +16,6 @@ const submitReport = async () => {
   isLoading.value = false
   showModal.value = true
 
-  // Reset the form
   url.value = ''
   cause.value = ''
 }

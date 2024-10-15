@@ -1,21 +1,12 @@
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/auth.store' // Importation du store d'authentification
+import { useAuthStore } from '@/stores/auth.store'
 
 const authStore = useAuthStore()
 const router = useRouter()
 
 const logout = async () => {
-  // Appel à la fonction de déconnexion dans le store Pinia
   await authStore.logout()
-
-  // Vérification si une erreur s'est produite
-  if (!authStore.error) {
-    // Si la déconnexion réussit, rediriger vers la page de login
-    router.push('/common/login')
-  } else {
-    // Si une erreur survient, afficher l'erreur dans la console
-    console.log(authStore.error)
-  }
+  if (!authStore.error) router.push('/common/login')
 }
 </script>
 
@@ -46,10 +37,7 @@ const logout = async () => {
           </a>
         </div>
       </div>
-
-      <!-- Partie droite : Conteneur flex pour les boutons -->
       <div class="flex">
-        <!-- Afficher le bouton de connexion uniquement si l'utilisateur n'est pas connecté -->
         <div
           v-if="!authStore.user"
           class="tooltip tooltip-top"
@@ -74,7 +62,6 @@ const logout = async () => {
             <i-mdi-logout />
           </button>
         </div>
-
         <div
           class="tooltip tooltip-top"
           data-tip="Settings"
@@ -86,13 +73,11 @@ const logout = async () => {
             <i-mdi-cog />
           </RouterLink>
         </div>
-
         <div
           class="tooltip tooltip-top"
           data-tip="Dark mode"
         >
           <label class="btn btn-ghost btn-sm swap swap-rotate">
-            <!-- this hidden checkbox controls the state -->
             <input
               type="checkbox"
               class="theme-controller"

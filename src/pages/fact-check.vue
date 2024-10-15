@@ -8,6 +8,7 @@ const analysisRating = ref(0)
 
 const submitReport = async () => {
   isLoading.value = true
+
   await new Promise((resolve) => setTimeout(resolve, 2000))
 
   console.log('Text to Analyze:', textToAnalyze.value)
@@ -18,7 +19,6 @@ const submitReport = async () => {
   isLoading.value = false
   showModal.value = true
 
-  // Reset the form
   analysisRating.value = ''
   textToAnalyze.value = ''
 }
@@ -32,7 +32,6 @@ const submitReport = async () => {
       class="space-y-4"
       @submit.prevent="submitReport"
     >
-      <!-- Text Area pour le texte à analyser -->
       <div class="form-control">
         <label
           class="label"
@@ -53,8 +52,6 @@ const submitReport = async () => {
           {{ textToAnalyze.length }}/4000 characters
         </span>
       </div>
-
-      <!-- Bouton de soumission -->
       <div class="form-control">
         <button
           type="submit"
@@ -73,8 +70,6 @@ const submitReport = async () => {
       </div>
     </form>
   </div>
-
-  <!-- Modal pour afficher le résultat -->
   <dialog
     id="report-modal"
     class="modal modal-bottom sm:modal-middle"
@@ -83,8 +78,6 @@ const submitReport = async () => {
     <div class="modal-box w-full">
       <h3 class="font-bold text-lg">Analysis result</h3>
       <p>The result of the fact-checking analysis is:</p>
-
-      <!-- Composant d'étoiles DaisyUI -->
       <div class="rating mt-4">
         <input
           v-for="n in 5"
@@ -96,8 +89,6 @@ const submitReport = async () => {
           disabled
         />
       </div>
-
-      <!-- Actions de la modal -->
       <div class="modal-action">
         <form method="dialog">
           <button

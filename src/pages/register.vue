@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-// Champs du formulaire d'inscription
-const username = ref('') // Nom d'utilisateur
-const email = ref('') // Email de l'utilisateur
-const password = ref('') // Mot de passe de l'utilisateur
-const confirmPassword = ref('') // Confirmation du mot de passe
-const acceptTerms = ref(false) // Consentement aux termes et conditions
-const isLoading = ref(false) // État de chargement pour la soumission
+const username = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const isLoading = ref(false)
 
-// Fonction de soumission du formulaire
 const submitRegister = async () => {
   if (password.value !== confirmPassword.value) {
     alert('Passwords do not match!')
@@ -47,13 +44,12 @@ const submitRegister = async () => {
   <div class="mx-auto p-4 bg-base-100 max-w-md">
     <h2 class="text-2xl font-bold text-center mb-4">Create an Account</h2>
     <div class="divider" />
-
-    <!-- Formulaire d'inscription -->
+    <!-- Registration form -->
     <form
       class="space-y-4"
       @submit.prevent="submitRegister"
     >
-      <!-- Nom d'utilisateur -->
+      <!-- Username -->
       <div class="form-control">
         <label
           class="label"
@@ -70,7 +66,6 @@ const submitRegister = async () => {
           required
         />
       </div>
-
       <!-- Email -->
       <div class="form-control">
         <label
@@ -88,8 +83,7 @@ const submitRegister = async () => {
           required
         />
       </div>
-
-      <!-- Mot de passe -->
+      <!-- Password -->
       <div class="form-control">
         <label
           class="label"
@@ -106,8 +100,7 @@ const submitRegister = async () => {
           required
         />
       </div>
-
-      <!-- Confirmation du mot de passe -->
+      <!-- Password Confirmation -->
       <div class="form-control">
         <label
           class="label"
@@ -124,8 +117,7 @@ const submitRegister = async () => {
           required
         />
       </div>
-
-      <!-- Checkbox "Accepter les termes" -->
+      <!-- Checkbox “Accept the terms” -->
       <div class="form-control">
         <label class="cursor-pointer flex items-start space-x-2">
           <input
@@ -145,7 +137,6 @@ const submitRegister = async () => {
           </span>
         </label>
       </div>
-
       <!-- Submit button -->
       <div class="form-control">
         <button

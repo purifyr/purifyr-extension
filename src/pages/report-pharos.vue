@@ -1,14 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { definePage } from 'unplugin-vue-router/runtime'
 
-definePage({
-  meta: {
-    requiresAuth: true,
-  },
-})
-
-// Champs du formulaire
 const screenshot = ref(null)
 const contentType = ref('')
 const description = ref('')
@@ -17,7 +9,6 @@ const consent = ref(false)
 const isLoading = ref(false)
 const showModal = ref(false)
 
-// Fonction de soumission du formulaire
 const submitReport = async () => {
   if (!consent.value) {
     alert('You must agree to the terms before submitting the report.')
@@ -36,7 +27,6 @@ const submitReport = async () => {
   isLoading.value = false
   showModal.value = true
 
-  // Reset du formulaire après soumission
   screenshot.value = null
   contentType.value = ''
   description.value = ''
@@ -62,7 +52,7 @@ const submitReport = async () => {
       class="space-y-4"
       @submit.prevent="submitReport"
     >
-      <!-- Capture d'écran -->
+      <!-- Screenshot -->
       <div class="form-control">
         <label
           class="label"
@@ -79,8 +69,7 @@ const submitReport = async () => {
           required
         />
       </div>
-
-      <!-- Type de contenu -->
+      <!-- Content Type -->
       <div class="form-control">
         <label
           class="label"
@@ -107,8 +96,7 @@ const submitReport = async () => {
           <option value="other">Other</option>
         </select>
       </div>
-
-      <!-- Description du problème -->
+      <!-- Description of the problem -->
       <div class="form-control">
         <label
           class="label"
@@ -125,8 +113,7 @@ const submitReport = async () => {
           required
         ></textarea>
       </div>
-
-      <!-- URL facultative -->
+      <!-- URL optional -->
       <div class="form-control">
         <label
           class="label"
@@ -142,8 +129,7 @@ const submitReport = async () => {
           class="input input-bordered w-full"
         />
       </div>
-
-      <!-- Checkbox pour consentement -->
+      <!-- Checkbox for consent -->
       <div class="form-control">
         <label class="cursor-pointer flex items-start space-x-2">
           <input
@@ -158,8 +144,7 @@ const submitReport = async () => {
           </span>
         </label>
       </div>
-
-      <!-- Bouton de soumission -->
+      <!-- Submit button -->
       <div class="form-control">
         <button
           type="submit"
@@ -178,7 +163,6 @@ const submitReport = async () => {
       </div>
     </form>
   </div>
-
   <!-- Modal -->
   <dialog
     id="report-modal"

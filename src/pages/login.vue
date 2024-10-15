@@ -42,8 +42,7 @@ const submitLogin = async () => {
   <div class="mx-auto p-4 bg-base-100 max-w-md">
     <h2 class="text-2xl font-bold text-center mb-4">Login to your account</h2>
     <div class="divider" />
-
-    <!-- Afficher les erreurs si elles existent -->
+    <!-- Show errors if they exist -->
     <div
       v-if="authStore.error"
       role="alert"
@@ -53,7 +52,6 @@ const submitLogin = async () => {
       <span>{{ authStore.error }}</span>
     </div>
 
-    <!-- Formulaire de login -->
     <form
       class="space-y-4"
       @submit.prevent="submitLogin"
@@ -75,8 +73,7 @@ const submitLogin = async () => {
           required
         />
       </div>
-
-      <!-- Mot de passe -->
+      <!-- Password -->
       <div class="form-control">
         <label
           class="label"
@@ -93,8 +90,7 @@ const submitLogin = async () => {
           required
         />
       </div>
-
-      <!-- Bouton de soumission -->
+      <!-- Submit button -->
       <div class="form-control">
         <button
           type="submit"
@@ -112,8 +108,7 @@ const submitLogin = async () => {
         </button>
       </div>
     </form>
-
-    <!-- Lien vers la vue de register -->
+    <!-- Link to register page -->
     <div class="text-center mt-4">
       <p class="text-sm">
         Don't have an account yet?
