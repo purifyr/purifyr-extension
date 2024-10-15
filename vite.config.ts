@@ -60,6 +60,21 @@ export default defineConfig({
           baseRoute: 'iframe',
         },
       ],
+      extendRoute(route, parent) {
+        if (route.path === '/common/login') {
+          // La route racine ("/") n'exige pas d'authentification
+          return route
+        }
+
+        // Ajouter la métadonnée `auth: true` à toutes les autres routes
+        return {
+          ...route,
+          meta: {
+            ...route.meta, // Préserve les métadonnées existantes
+            auth: true,    // Ajoute auth à true pour indiquer qu'une authentification est requise
+          },
+        }
+      },
     }),
 
     AutoImport({

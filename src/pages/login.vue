@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router' // Importation du RouterLink pour créer des liens internes
+import { useAuthStore } from '@/stores/auth.store' // Importation du store d'authentification
+import { useRouter } from 'vue-router' // Pour rediriger après la connexion réussie
 
 // Champs du formulaire de login
 const email = ref('') // Email de l'utilisateur
@@ -8,17 +9,25 @@ const password = ref('') // Mot de passe de l'utilisateur
 const rememberMe = ref(false) // Se souvenir de l'utilisateur
 const isLoading = ref(false) // État de chargement pour la soumission
 
+// Initialisation du store Pinia et du routeur
+const authStore = useAuthStore()
+const router = useRouter()
+
 // Fonction de soumission du formulaire
 const submitLogin = async () => {
   isLoading.value = true
-  await new Promise((resolve) => setTimeout(resolve, 2000)) // Simulation du délai de traitement
 
-  console.log('Email:', email.value)
-  console.log('Password:', password.value)
-  console.log('Remember me:', rememberMe.value)
+  // Appel au store pour effectuer la connexion
+  await authStore.login({ email: email.value, password: password.value })
 
-  // Logique de soumission (API call, authentification, etc.)
-  // ...
+  // Vérification de l'état après la tentative de connexion
+  if (!authStore.error) {
+    // Si la connexion réussit, redirige vers une autre page (ex. Dashboard)
+    router.push('/')
+  } else {
+    // Si une erreur survient, elle sera gérée via authStore.error
+    console.log(authStore.error)
+  }
 
   isLoading.value = false
 
@@ -33,6 +42,14 @@ const submitLogin = async () => {
   <div class="mx-auto p-4 bg-base-100 max-w-md">
     <h2 class="text-2xl font-bold text-center mb-4">Login to your account</h2>
     <div class="divider"></div>
+
+    <!-- Afficher les erreurs si elles existent -->
+    <p
+      v-if="authStore.error"
+      class="text-red-500 text-center"
+    >
+      {{ authStore.error }}
+    </p>
 
     <!-- Formulaire de login -->
     <form

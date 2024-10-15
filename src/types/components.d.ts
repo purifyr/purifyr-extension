@@ -17,6 +17,7 @@ declare module 'vue' {
     IMdiFileSearchOutline: typeof import('~icons/mdi/file-search-outline')['default']
     IMdiInformationSlabCircleOutline: typeof import('~icons/mdi/information-slab-circle-outline')['default']
     IMdiLinkVariant: typeof import('~icons/mdi/link-variant')['default']
+    IMdiLogout: typeof import('~icons/mdi/logout')['default']
     IMdiPoliceBadgeOutline: typeof import('~icons/mdi/police-badge-outline')['default']
     IMdiWeatherNight: typeof import('~icons/mdi/weather-night')['default']
     Install: typeof import('./../components/install.vue')['default']

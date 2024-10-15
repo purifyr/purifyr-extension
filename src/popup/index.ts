@@ -1,6 +1,9 @@
 import { createPinia } from 'pinia'
+import piniaPersist from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router/auto'
+import { isAuthenticated } from '../utils'
+import { useAuthStore } from '@/stores/auth.store'
 import App from './app.vue'
 import routes from '~pages'
 import '@/assets/base.scss'
@@ -16,7 +19,21 @@ const router = createRouter({
   routes,
 })
 
-createApp(App).use(router).use(createPinia()).mount('#app')
+// Créer l'instance Pinia
+const pinia = createPinia()
+// Utiliser le plugin de persistance pour Pinia
+pinia.use(piniaPersist)
+// Créer et monter l'application Vue
+createApp(App).use(router).use(pinia).mount('#app')
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  if (to.meta.auth && !authStore.user) {
+    next({ path: '/common/login', query: { redirect: to.fullPath } });
+  } else {
+    next();
+  }
+});
 
 console.log(router.getRoutes())
 
