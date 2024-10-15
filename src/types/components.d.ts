@@ -13,6 +13,7 @@ declare module 'vue' {
     IIcBaselineWbSunny: typeof import('~icons/ic/baseline-wb-sunny')['default']
     IIcOutlineRemoveRedEye: typeof import('~icons/ic/outline-remove-red-eye')['default']
     IMdiAccount: typeof import('~icons/mdi/account')['default']
+    IMdiAlertCircleOutline: typeof import('~icons/mdi/alert-circle-outline')['default']
     IMdiCog: typeof import('~icons/mdi/cog')['default']
     IMdiFileSearchOutline: typeof import('~icons/mdi/file-search-outline')['default']
     IMdiInformationSlabCircleOutline: typeof import('~icons/mdi/information-slab-circle-outline')['default']

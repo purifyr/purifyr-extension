@@ -41,15 +41,17 @@ const submitLogin = async () => {
 <template>
   <div class="mx-auto p-4 bg-base-100 max-w-md">
     <h2 class="text-2xl font-bold text-center mb-4">Login to your account</h2>
-    <div class="divider"></div>
+    <div class="divider" />
 
     <!-- Afficher les erreurs si elles existent -->
-    <p
+    <div
       v-if="authStore.error"
-      class="text-red-500 text-center"
+      role="alert"
+      class="alert alert-error mb-4"
     >
-      {{ authStore.error }}
-    </p>
+      <i-mdi-alert-circle-outline class="" />
+      <span>{{ authStore.error }}</span>
+    </div>
 
     <!-- Formulaire de login -->
     <form

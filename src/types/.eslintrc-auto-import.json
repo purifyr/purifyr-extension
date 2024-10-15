@@ -299,6 +299,7 @@
     "watchTriggerable": true,
     "watchWithFilter": true,
     "whenever": true,
-    "useAuthStore": true
+    "useAuthStore": true,
+    "useApiFetch": true
   }
 }
