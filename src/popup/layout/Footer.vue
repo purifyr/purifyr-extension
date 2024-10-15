@@ -32,6 +32,17 @@
       <div class="flex">
         <div
           class="tooltip tooltip-top"
+          data-tip="User"
+        >
+          <RouterLink
+            to="/common/login"
+            class="btn btn-ghost btn-sm"
+          >
+            <i-mdi-account />
+          </RouterLink>
+        </div>
+        <div
+          class="tooltip tooltip-top"
           data-tip="Settings"
         >
           <RouterLink

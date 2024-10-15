@@ -8,5 +8,6 @@
   "typescript.preferences.autoImportFileExcludePatterns": ["vue-router"],
   "markdown.validate.ignoredLinks": ["./src/setup/pages/index.ts"],
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "commentTranslate.targetLanguage": "en"
+  "commentTranslate.targetLanguage": "en",
+  "commentTranslate.browse.mode": "contrast"
 }

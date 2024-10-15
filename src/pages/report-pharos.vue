@@ -1,14 +1,21 @@
 <script setup>
 import { ref } from 'vue'
+import { definePage } from 'unplugin-vue-router/runtime'
+
+definePage({
+  meta: {
+    requiresAuth: true,
+  },
+})
 
 // Champs du formulaire
-const screenshot = ref(null) // Capture d'écran du contenu
-const contentType = ref('') // Type de contenu signalé
-const description = ref('') // Brève description du problème
-const optionalUrl = ref('') // URL du contenu (facultatif)
-const consent = ref(false) // Consentement de l'utilisateur
+const screenshot = ref(null)
+const contentType = ref('')
+const description = ref('')
+const optionalUrl = ref('')
+const consent = ref(false)
 const isLoading = ref(false)
-const showModal = ref(false) // Variable pour afficher ou cacher la modal
+const showModal = ref(false)
 
 // Fonction de soumission du formulaire
 const submitReport = async () => {
@@ -50,7 +57,7 @@ const submitReport = async () => {
         Pharos
       </a>
     </h2>
-    <div class="divider"></div>
+    <div class="divider" />
     <form
       class="space-y-4"
       @submit.prevent="submitReport"
@@ -125,7 +132,7 @@ const submitReport = async () => {
           class="label"
           for="optional-url"
         >
-          <span class="label-text">Optional: URL of the Content</span>
+          <span class="label-text">URL of the Content (Optional)</span>
         </label>
         <input
           id="optional-url"
