@@ -1,4 +1,3 @@
-// Function to notify the user with a help link and action buttons
 // Function to notify the user with two buttons and close the tab when clicking the notification
 function notifyUser(url: string, tabId: number) {
   const helpUrl =
@@ -9,7 +8,7 @@ function notifyUser(url: string, tabId: number) {
     iconUrl: chrome.runtime.getURL('src/assets/security.png'),
     title: 'Purifyr - Warning',
     message:
-      'You are visiting a potentially harmful or dangerous site. This URL has been flagged by more than 10 users.',
+      'You are visiting a potentially harmful or dangerous site. This URL has been flagged by +10 users has suspicious.',
     contextMessage: 'Click to quit the website.', // Message updated to inform about clicking the notification to quit
     priority: 2,
     buttons: [
@@ -18,25 +17,27 @@ function notifyUser(url: string, tabId: number) {
     ],
     isClickable: true,
     requireInteraction: true,
-  });
-
-  // Listener for button clicks on the notification
-  chrome.notifications.onButtonClicked.addListener((notifId, btnIndex) => {
-    if (notifId) {
-      if (btnIndex === 0) {
-        chrome.tabs.create({ url: helpUrl }); // Opens help URL in a new tab if "Learn more" is clicked
-      } else if (btnIndex === 1) {
-        console.log('User ignored the warning.');
+  }, (notificationId) => {
+    // Listener for button clicks on the notification
+    chrome.notifications.onButtonClicked.addListener((notifId, btnIndex) => {
+      if (notifId === notificationId) {
+        if (btnIndex === 0) {
+          chrome.tabs.create({ url: helpUrl }); // Opens help URL in a new tab if "Learn more" is clicked
+        } else if (btnIndex === 1) {
+          console.log('User ignored the warning.');
+        }
+        chrome.notifications.clear(notifId); // Close the notification after a button click
       }
-    }
-  });
+    });
 
-  // Listener for clicks on the notification itself
-  chrome.notifications.onClicked.addListener((notifId) => {
-    if (notifId) {
-      chrome.tabs.remove(tabId); // Closes the current tab when notification is clicked
-      console.log('User quit the website by clicking the notification.');
-    }
+    // Listener for clicks on the notification itself
+    chrome.notifications.onClicked.addListener((notifId) => {
+      if (notifId === notificationId) {
+        chrome.tabs.remove(tabId); // Closes the current tab when notification is clicked
+        chrome.notifications.clear(notifId); // Close the notification after click
+        console.log('User quit the website by clicking the notification.');
+      }
+    });
   });
 
   console.log(`User notified about problematic URL: ${url}`);
@@ -51,19 +52,20 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
       tab.url!.includes(approvedUrl)
     );
     if (isProblematic) {
-      console.error(`Problematic URL detected: ${tab.url}`);
       // If the URL is problematic, send a notification and pass the tabId to handle closing the tab
       notifyUser(tab.url, tabId);
     }
   }
 });
 
-// Function to fetch the list of approved problematic URLs
+// Function to fetch the list of approved problematic URLs from the API
 async function fetchApprovedUrls(): Promise<string[]> {
   try {
-    return ["https://www.google.fr/"]; // Replace with actual URL list
+    const response = await fetch('http://localhost:3000/v1/reports/approved-urls');
+    const data = await response.json();
+    return data.approvedUrls;
   } catch (error) {
-    console.error('Failed to fetch approved URLs:', error);
+    console.error('Failed to fetch approved URLs from API:', error);
     return [];
   }
 }
