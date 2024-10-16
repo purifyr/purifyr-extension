@@ -90,46 +90,62 @@ function activateElementSelector() {
 }
 
 // Function to hide an element based on the selector
+// Function to hide an element based on the selector
 function hideElement(selector) {
   const elements = document.querySelectorAll(selector);
   elements.forEach((el) => {
-    // Créer un conteneur de remplacement avec le message et le bouton
+    // Create a replacement container with the message and button
     const placeholder = document.createElement('div');
     placeholder.style.display = 'flex';
+    placeholder.style.flexDirection = 'column'; // Arrange text and button vertically
     placeholder.style.alignItems = 'center';
     placeholder.style.justifyContent = 'center';
     placeholder.style.backgroundColor = '#f9f9f9';
     placeholder.style.padding = '10px';
     placeholder.style.border = '1px solid #ccc';
     placeholder.style.borderRadius = '5px';
-    placeholder.style.margin = '10px 0';
     placeholder.style.color = '#333';
     placeholder.style.fontSize = '16px';
     placeholder.style.fontWeight = 'bold';
 
+    // Main message
     const message = document.createElement('span');
     message.innerHTML = '🔒 Content blocked by Purifyr extension.';
 
+    // Subtitle with more explicit information
+    const subtitle = document.createElement('p');
+    subtitle.innerHTML = 'This content has been flagged by 10+ users as fake.';
+    subtitle.style.fontSize = '12px';
+    subtitle.style.margin = '0px';
+    subtitle.style.color = '#666';
+
+    // "Show" button to reveal the blocked content
     const showButton = document.createElement('button');
     showButton.textContent = 'Show';
-    showButton.style.marginLeft = '10px';
     showButton.style.backgroundColor = '#6f8ba7';
     showButton.style.color = 'white';
     showButton.style.border = 'none';
     showButton.style.padding = '5px 10px';
+    subtitle.style.marginTop = '2px';
+    subtitle.style.marginBottom = '4px';
     showButton.style.borderRadius = '5px';
     showButton.style.cursor = 'pointer';
 
+    // Add event listener to show the hidden content when button is clicked
     showButton.addEventListener('click', () => {
-      placeholder.replaceWith(el);
-      el.style.display = '';
+      placeholder.replaceWith(el); // Replace the placeholder with the original element
+      el.style.display = ''; // Display the original element
     });
 
+    // Hide the original element
     el.style.display = 'none';
 
+    // Append the message, subtitle, and button to the placeholder
     placeholder.appendChild(message);
+    placeholder.appendChild(subtitle); // Add the more explicit subtitle
     placeholder.appendChild(showButton);
 
+    // Replace the original element with the placeholder
     el.replaceWith(placeholder);
   });
 }
