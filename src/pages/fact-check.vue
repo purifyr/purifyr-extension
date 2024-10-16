@@ -1,14 +1,33 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const textToAnalyze = ref('')
 const isLoading = ref(false)
 const showModal = ref(false)
 const analysisRating = ref(0)
 
+// Messages based on the analysis rating
+const messages = computed(() => {
+  switch (analysisRating.value) {
+    case 1:
+      return 'The content is highly unreliable. Be cautious about this information.'
+    case 2:
+      return 'The content is somewhat unreliable. Double-check the sources.'
+    case 3:
+      return 'The content is moderately accurate. Some claims might require verification.'
+    case 4:
+      return 'The content is mostly accurate. It appears to be reliable.'
+    case 5:
+      return 'The content is highly accurate. It can be trusted.'
+    default:
+      return ''
+  }
+})
+
 const submitReport = async () => {
   isLoading.value = true
 
+  // Simulate a delay for the analysis process (e.g., API call)
   await new Promise((resolve) => setTimeout(resolve, 2000))
 
   console.log('Text to Analyze:', textToAnalyze.value)
@@ -19,7 +38,7 @@ const submitReport = async () => {
   isLoading.value = false
   showModal.value = true
 
-  analysisRating.value = ''
+  // Clear the input field
   textToAnalyze.value = ''
 }
 </script>
@@ -70,6 +89,8 @@ const submitReport = async () => {
       </div>
     </form>
   </div>
+
+  <!-- Modal for displaying analysis result -->
   <dialog
     id="report-modal"
     class="modal modal-bottom sm:modal-middle"
@@ -78,17 +99,27 @@ const submitReport = async () => {
     <div class="modal-box w-full">
       <h3 class="font-bold text-lg">Analysis result</h3>
       <p>The result of the fact-checking analysis is:</p>
+
+      <!-- Star Rating Display -->
       <div class="rating mt-4">
+        <!-- Loop to display 5 stars -->
         <input
           v-for="n in 5"
           :key="n"
           type="radio"
           name="rating"
-          class="mask mask-star-2"
+          class="mask mask-star-2 bg-orange-400"
           :checked="n <= analysisRating"
           disabled
         />
       </div>
+
+      <!-- Analysis message based on the rating -->
+      <p class="mt-4">
+        {{ messages }}
+      </p>
+
+      <!-- Close button for the modal -->
       <div class="modal-action">
         <form method="dialog">
           <button
