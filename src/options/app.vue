@@ -1,10 +1,4 @@
-<script setup lang="ts">
-import { useAppStore } from '@/stores/app.store'
-
-const store = useAppStore()
-
-const count = computed(() => store.count)
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <header
@@ -16,7 +10,7 @@ const count = computed(() => store.count)
 
   <RouterView />
 
-  <p>Count: {{ count }}</p>
+  <p>Counter: 1</p>
 
   <footer
     aria-label="Site Footer"
