@@ -15,7 +15,6 @@ declare module 'vue' {
     IMdiAccount: typeof import('~icons/mdi/account')['default']
     IMdiAlertCircleOutline: typeof import('~icons/mdi/alert-circle-outline')['default']
     IMdiCog: typeof import('~icons/mdi/cog')['default']
-    IMdiContentPaste: typeof import('~icons/mdi/content-paste')['default']
     IMdiFileSearchOutline: typeof import('~icons/mdi/file-search-outline')['default']
     IMdiInformationSlabCircleOutline: typeof import('~icons/mdi/information-slab-circle-outline')['default']
     IMdiLinkVariant: typeof import('~icons/mdi/link-variant')['default']

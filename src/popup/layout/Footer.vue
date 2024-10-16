@@ -67,7 +67,7 @@ const logout = async () => {
           data-tip="Settings"
         >
           <RouterLink
-            to="/options"
+            to="/common/user-settings"
             class="btn btn-ghost btn-sm"
           >
             <i-mdi-cog />

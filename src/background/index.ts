@@ -43,6 +43,7 @@ function notifyUser(url: string, tabId: number) {
   console.log(`User notified about problematic URL: ${url}`);
 }
 
+
 // Listener for tab updates to check if the user is visiting a problematic URL
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.url) {
@@ -57,6 +58,31 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     }
   }
 });
+
+chrome.runtime.onInstalled.addListener(() => {
+  // Créer une entrée pour signaler du texte
+  chrome.contextMenus.create({
+    id: 'report-text',
+    title: 'Report selected text',
+    contexts: ['selection'],
+  });
+  chrome.contextMenus.create({
+    id: 'report-image',
+    title: 'Report this image',
+    contexts: ['image'],
+  });
+  chrome.contextMenus.create({
+    id: 'report-video',
+    title: 'Report this video',
+    contexts: ['video'],
+  });
+  chrome.contextMenus.create({
+    id: 'report-html',
+    title: 'Report this element',
+    contexts: ['page', 'link', 'frame'],
+  });
+});
+
 
 // Function to fetch the list of approved problematic URLs from the API
 async function fetchApprovedUrls(): Promise<string[]> {
