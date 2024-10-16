@@ -23,7 +23,7 @@ const pharosReports = ref([
     id: 2,
     url: 'https://illegal.com',
     cause: 'Illegal Content',
-    status: 'Sent to Pharos',
+    status: 'Sent to pharos',
   },
 ])
 
@@ -33,7 +33,7 @@ const activeTab = ref('profile')
 
 <template>
   <div class="mx-auto p-4 bg-base-100">
-    <h2 class="text-3xl font-bold text-center mb-6">User Settings</h2>
+    <h2 class="text-3xl font-bold text-center mb-6">User settings</h2>
 
     <!-- Tabs navigation -->
     <div class="tabs tabs-bordered">
