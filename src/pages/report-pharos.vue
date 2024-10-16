@@ -1,13 +1,20 @@
 <script setup>
 import { ref } from 'vue'
+import { useReportPharosStore } from '@/stores/reportPharos.store' // Importez le store
 
 const screenshot = ref(null)
-const contentType = ref('')
+const cause = ref('')
 const description = ref('')
 const optionalUrl = ref('')
 const consent = ref(false)
 const isLoading = ref(false)
 const showModal = ref(false)
+
+const reportPharosStore = useReportPharosStore() // Instanciez le store
+
+const handleFileChange = (e) => {
+  screenshot.value = e.target.files[0]
+}
 
 const submitReport = async () => {
   if (!consent.value) {
@@ -15,20 +22,28 @@ const submitReport = async () => {
     return
   }
 
-  isLoading.value = true
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  if (!screenshot.value) {
+    alert('Screenshot is required')
+    return
+  }
 
-  console.log('Screenshot:', screenshot.value)
-  console.log('Content Type:', contentType.value)
-  console.log('Description:', description.value)
-  console.log('Optional URL:', optionalUrl.value)
-  console.log('Consent:', consent.value)
+  isLoading.value = true
+
+  // Appel à l'action du store pour ajouter le rapport
+  await reportPharosStore.addReportPharos({
+    screenshot: screenshot.value,
+    cause: cause.value,
+    description: description.value,
+    optionalUrl: optionalUrl.value,
+    consent: consent.value,
+  })
 
   isLoading.value = false
   showModal.value = true
 
+  // Reset form
   screenshot.value = null
-  contentType.value = ''
+  cause.value = ''
   description.value = ''
   optionalUrl.value = ''
   consent.value = false
@@ -39,54 +54,27 @@ const submitReport = async () => {
   <div class="mx-auto p-4 bg-base-100">
     <h2 class="text-2xl font-bold text-center mb-4">
       Assisted Reporting via
-      <a
-        href="https://www.internet-signalement.gouv.fr/"
-        target="_blank"
-        class="link link-hover"
-      >
+      <a href="https://www.internet-signalement.gouv.fr/" target="_blank" class="link link-hover">
         Pharos
       </a>
     </h2>
     <div class="divider" />
-    <form
-      class="space-y-4"
-      @submit.prevent="submitReport"
-    >
+    <form class="space-y-4" @submit.prevent="submitReport">
       <!-- Screenshot -->
       <div class="form-control">
-        <label
-          class="label"
-          for="screenshot"
-        >
+        <label class="label" for="screenshot">
           <span class="label-text">Screenshot of the Content</span>
         </label>
-        <input
-          id="screenshot"
-          type="file"
-          accept="image/*"
-          @change="(e) => (screenshot.value = e.target.files[0])"
-          class="file-input file-input-bordered w-full"
-          required
-        />
+        <input id="screenshot" type="file" accept="image/*" class="file-input file-input-bordered w-full" required
+          @change="handleFileChange">
       </div>
       <!-- Content Type -->
       <div class="form-control">
-        <label
-          class="label"
-          for="content-type"
-        >
+        <label class="label" for="content-type">
           <span class="label-text">Type of Content</span>
         </label>
-        <select
-          id="content-type"
-          v-model="contentType"
-          class="select select-bordered w-full"
-          required
-        >
-          <option
-            disabled
-            value=""
-          >
+        <select id="content-type" v-model="cause" class="select select-bordered w-full" required>
+          <option disabled value="">
             Select a content type
           </option>
           <option value="cyberbullying">Cyberbullying</option>
@@ -98,46 +86,25 @@ const submitReport = async () => {
       </div>
       <!-- Description of the problem -->
       <div class="form-control">
-        <label
-          class="label"
-          for="description"
-        >
+        <label class="label" for="description">
           <span class="label-text">Brief Description of the Issue</span>
         </label>
-        <textarea
-          id="description"
-          v-model="description"
+        <textarea id="description" v-model="description"
           placeholder="Describe the issue (e.g., 'This content promotes hate')"
-          class="textarea textarea-bordered w-full"
-          rows="4"
-          required
-        ></textarea>
+          class="textarea textarea-bordered w-full" rows="4" required />
       </div>
       <!-- URL optional -->
       <div class="form-control">
-        <label
-          class="label"
-          for="optional-url"
-        >
+        <label class="label" for="optional-url">
           <span class="label-text">URL of the Content (Optional)</span>
         </label>
-        <input
-          id="optional-url"
-          type="url"
-          v-model="optionalUrl"
-          placeholder="https://example.com"
-          class="input input-bordered w-full"
-        />
+        <input id="optional-url" v-model="optionalUrl" type="url" placeholder="https://example.com"
+          class="input input-bordered w-full">
       </div>
       <!-- Checkbox for consent -->
       <div class="form-control">
         <label class="cursor-pointer flex items-start space-x-2">
-          <input
-            type="checkbox"
-            v-model="consent"
-            class="checkbox checkbox-primary"
-            required
-          />
+          <input v-model="consent" type="checkbox" class="checkbox checkbox-primary" required>
           <span class="label-text">
             I consent that the provided information will be verified and
             understand that false statements may result in sanctions.
@@ -146,16 +113,9 @@ const submitReport = async () => {
       </div>
       <!-- Submit button -->
       <div class="form-control">
-        <button
-          type="submit"
-          class="btn btn-secondary w-full"
-          :disabled="isLoading"
-        >
+        <button type="submit" class="btn btn-secondary w-full" :disabled="isLoading">
           <span v-if="!isLoading">Submit Report</span>
-          <span
-            v-if="isLoading"
-            class="flex items-center justify-center"
-          >
+          <span v-if="isLoading" class="flex items-center justify-center">
             <span class="loading loading-spinner mr-2" />
             Submitting...
           </span>
@@ -164,19 +124,14 @@ const submitReport = async () => {
     </form>
   </div>
   <!-- Modal -->
-  <dialog
-    id="report-modal"
-    class="modal modal-bottom sm:modal-middle"
-    :class="{ 'modal-open': showModal }"
-  >
+  <dialog id="report-modal" class="modal modal-bottom sm:modal-middle" :class="{ 'modal-open': showModal }">
     <div class="modal-box w-full">
-      <h3 class="font-bold text-lg">Report submitted</h3>
+      <h3 class="font-bold text-lg">
+        Report submitted
+      </h3>
       <p>Your report has been submitted successfully and is under review.</p>
       <div class="modal-action">
-        <button
-          class="btn btn-sm"
-          @click="showModal = false"
-        >
+        <button class="btn btn-sm" @click="showModal = false">
           Close
         </button>
       </div>
