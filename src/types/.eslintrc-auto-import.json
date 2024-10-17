@@ -48,7 +48,6 @@
     "ignorableWatch": true,
     "inject": true,
     "injectLocal": true,
-    "isAuthenticated": true,
     "isDefined": true,
     "isProxy": true,
     "isReactive": true,
@@ -120,7 +119,7 @@
     "until": true,
     "useActiveElement": true,
     "useAnimate": true,
-    "useAppStore": true,
+    "useApiFetch": true,
     "useArrayDifference": true,
     "useArrayEvery": true,
     "useArrayFilter": true,
@@ -136,6 +135,7 @@
     "useAsyncQueue": true,
     "useAsyncState": true,
     "useAttrs": true,
+    "useAuthStore": true,
     "useBase64": true,
     "useBattery": true,
     "useBluetooth": true,
@@ -231,6 +231,8 @@
     "usePrevious": true,
     "useRafFn": true,
     "useRefHistory": true,
+    "useReportPharosStore": true,
+    "useReportStore": true,
     "useResizeObserver": true,
     "useRoute": true,
     "useRouter": true,
@@ -298,9 +300,6 @@
     "watchThrottled": true,
     "watchTriggerable": true,
     "watchWithFilter": true,
-    "whenever": true,
-    "useAuthStore": true,
-    "useApiFetch": true,
-    "useReportStore": true
+    "whenever": true
   }
 }
